@@ -11,6 +11,7 @@ mp[1]=10
 
 #### 迭代器
 ```cpp
+//thi
 map<int,int>::iterator it=mp.begin();
 cout<<it->first<<endl;//或(*it).first
 cout<<it->second<<endl;//或(*it).second
