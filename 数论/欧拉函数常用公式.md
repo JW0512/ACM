@@ -1,0 +1,108 @@
+# 欧拉函数
+
+预处理
+
+```
+const int maxn2 = 1e7, maxp = 1e6;
+int prime[maxp + 10], check[maxn2 + 10], phi[maxn2+10],num = 0;
+void GetPhi()
+{
+	phi[1] = 1;
+	memset(check, 0, sizeof(check));
+	for (int i = 2; i < maxn2; i++)
+	{
+		if (!check[i])
+		{
+			prime[num++] = i;
+			phi[i] = i - 1;
+		}
+		for (int j = 0; j < num; j++)
+		{
+			if (i*prime[j] > maxn2)
+			{
+				break;
+			}
+			check[i*prime[j]] = 1;
+			if (i%prime[j] == 0)//i含有了i*prime[j]的所有质因子
+			{
+				phi[i*prime[j]] = prime[j] * phi[i];
+				break;
+			}
+			else//i和prime[j]互质
+			{
+				phi[i*prime[j]] = phi[i] * (prime[j] - 1);//欧拉函数的积性性质：m,n互质，则phi[m*n]=phi[m]*phi[n]
+			}
+		}
+	}
+	return;
+}
+```
+---
+单个欧拉函数
+
+```
+int phi2(int n)
+{
+	int res = n, a = n;
+	for (int i = 2; i*i <= a;i++)
+	{	
+		if (a%i == 0)
+		{
+			res = res / i * (i - 1);
+			while (a%i == 0)
+			{
+				a /= i;
+			}
+		}
+	}
+	if (a > 1)
+	{
+		res = res / a * (a - 1);
+	}
+	return res;
+}
+```
+---
+
+公式打表法
+欧拉函数的通式：φ(n)=n*(1-1/p1)*(1-1/p2)*(1-1/p3)*(1-1/p4)…..(1-1/pn),其中p1, p2……pn为n的所有质因数，n是不为0的整数。φ(1)=1（唯一和1互质的数就是1本身）。
+
+```
+void value()
+{
+	memset(euler, 0, sizeof(euler));
+	euler[1] = 1;
+	for (int i = 2; i <= maxn; i++)
+	{
+		if (!euler[i])
+		{
+			for (int j = i; j <= maxn; j += i)//这里是j+=i,不是j++
+			{
+				if (!euler[j])
+					euler[j] = j;
+				euler[j] = euler[j] / i * (i - 1);
+			}
+		}
+	}
+}
+```
+---
+
+欧拉函数常用性质和公式
+
+* 对于质数p，$\varphi(p)=p-1$
+<br>
+* $\sum_{d|n}\varphi(d)=n\quad$包括1和本身
+<br>
+* $\sum_{gcd(d,n)==1}d=\varphi(n)*n/2$
+<br>
+* $\sum_{i=1}^{n-1}gcd(i,n)=\sum_{d|n}d\varphi(n|d)$
+<br>
+* 若p为质数，$n=p^k,\varphi(n)=p^k-p^{k-1}$
+<br>
+* 积性性质：若m,n互质，$\varphi(m*n)=\varphi(m)*\varphi(n)$
+<br>
+* 降幂运用：
+$a^b=a^{b\%\varphi(p)}(mod\quad p)\quad gcd(a,p)=1$
+$a^b=a^b(mod\quad p)\quad gcd(a,p)\neq 1,b<\varphi(p)$
+$a^b=a^{b\% \varphi(p)+\varphi(p)}(mod\quad p)\quad gcd(a,p)\neq 1,b\geq \varphi(p)$
