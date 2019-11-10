@@ -1,8 +1,9 @@
-## 题一：K-th Number
+## 区间第k小、第k大
+### 题一：K-th Number
 [[POJ 2104](http://poj.org/problem?id=2104)]
 Time Limit: 20000MS
 Memory Limit: 65536K
-## 题二：【模板】可持久化线段树 1（主席树）
+### 题二：【模板】可持久化线段树 1（主席树）
 [[P3834](https://www.luogu.org/problem/P3834)]
 Time Limit:1.00s ~ 1.20s
 Memory Limit:125.00MB ~ 250.00MB
@@ -15,6 +16,7 @@ Memory Limit:125.00MB ~ 250.00MB
 #### 思路
 主席树模板
 
+#### 代码
 Time：1219MS
 Memory：22848K
 
@@ -43,18 +45,18 @@ void init()
 }
 
 //更新新的树 
-void update(int& x, int y, int l, int r, int p)
+void update(int& x, int y, int l, int r, int pos)
 {
-	tree[++cnt] = tree[y];//复制节点 
-	tree[cnt].sum++;//区间内p的数量+1 
-	x = cnt;//记录节点坐标 
+	x = ++cnt;//记录节点坐标 
+	tree[x] = tree[y];//复制节点 
+	tree[x].sum++;//区间内p的数量+1 
 	if (l == r)
 		return;
 	int mid = (l + r) >> 1;
-	if (p <= mid)//更新左子树 
-		update(tree[x].l, tree[y].l, l, mid, p);
+	if (pos <= mid)//更新左子树 
+		update(tree[x].l, tree[y].l, l, mid, pos);
 	else//更新右子树 
-		update(tree[x].r, tree[y].r, mid + 1, r, p);
+		update(tree[x].r, tree[y].r, mid + 1, r, pos);
 }
 
 //查询区间第k小
