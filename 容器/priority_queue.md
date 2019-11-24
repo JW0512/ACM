@@ -19,10 +19,33 @@
 由于元素是从顶部弹出的，所以输出大小顺序是反的
 
 #### 自定义优先级
+* 从小到大输出
 ```cpp
-
+priority_queue<int, vector<int>, greater<int> > q;
 ```
-
+* 从小到大输出
+```cpp
+struct cmp
+{
+	bool operator ()(int x, int y)
+	{
+		return x > y;
+	}
+};
+priority_queue<int, vector<int>, cmp> q;
+```
+* 按照结构体的x从小到大输出
+```cpp
+struct node
+{
+	int x, y;
+	friend bool operator < (node a, node b)
+	{
+		return a.x > b.x;
+	}
+}no[macn];
+priority_queue<node> q;
+```
 ### 修改数据
 不能通过下标的形式插入新数据，可以通过下标修改已有数据，但易访问越界出错
 |用法|解释|时间复杂度
