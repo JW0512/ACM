@@ -6,20 +6,20 @@
 **特点：** 获取元素效率较高，插入和删除的效率较高
 **注意事项：** 禁止在首尾之外的地方访问/插入元素
 
-## 函数详解
+---
 
 ### 构造函数
 |用法|解释
 |---|---
 |deque < Type > deq;|新建Type类型的deque
 |deque < Type > deq2(deq1);|deq2是deq1的副本
-|deque < Type > deq2=deq1;|同上
+|deque < Type > deq2=deq1;|赋值，两者大小可以不一样
 |deque < Type > deq(n);|deq包含n个元素
 |deque < Type > deq(n,i);|deq包含n个元素，全部初始化为i
 |deque < Type > deq{a,b,c,...};|包含初始个数的的元素，每个元素赋予相应初值
 |deque < Type > deq={a,b,c,...};|同上
 |deque<deque< Type > > deq;|嵌套deque，相当于二维数组
-
+注意：圆括号()只能在定义时使用
 
 ### 修改数据
 不能通过下标的形式插入新数据，可以通过下标修改已有数据，但易访问越界出错
@@ -76,15 +76,15 @@ emplace效率比insert和push_back高一点，因为不触发拷贝构造和转�
 |deq.empty();|为空返回true，不为空返回false|O(1)
 
 ### 迭代器
-|用法|解释|时间复杂度
-|---|---|---
+|用法|解释
+|---|---
 |deque<Type>:: iterator it;|定义一个Type类型的迭代器it
 |deque<Type>::reverse_iterator it;|定义一个Type类型的反向迭代器it
-|	for (auto it=deq.begin();it!=deq.end();it++) cout<<*it<<endl; |用auto遍历
-|	for (auto it: deq) cout<<it<<endl; |用auto遍历
+|	for (auto it=deq.begin();it!=deq.end();it++)<br>cout<<*it<<endl; |用auto遍历
+|	for (auto it: deq)<br>cout<<it<<endl; |用auto遍历
 
 |支持的操作|解释
-|---|---|
+|---|---
 |operator* |取内容
 |operator-> |取地址
 |operator++ |自增

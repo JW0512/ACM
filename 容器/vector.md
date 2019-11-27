@@ -5,20 +5,20 @@
 **特点：** 高效率获取元素，插入和删除效率很低
 **注意事项：** 插入和删除会使迭代器失效
 
-## 函数详解
+---
 
 ### 构造函数
 |用法|解释
 |---|---
 |vector < Type > v;|新建Type类型的vector
 |vector < Type > v2(v1);|v2是v1的副本
-|vector < Type > v2=v1;|同上
+|vector < Type > v2=v1;|赋值，两者大小可以不一样
 |vector < Type > v(n);|v包含n个元素
 |vector < Type > v(n,i);|v包含n个元素，全部初始化为i
 |vector < Type > v{a,b,c,...};|包含初始个数的的元素，每个元素赋予相应初值
 |vector < Type > v={a,b,c,...};|同上
 |vector<vector< Type > > v;|嵌套vector，相当于二维数组
-
+注意：圆括号()只能在定义时使用
 
 ### 修改数据
 不能通过下标的形式插入新数据，可以通过下标修改已有数据，但易访问越界出错
@@ -74,15 +74,15 @@ emplace效率比insert和push_back高一点，因为不触发拷贝构造和转�
 |v.reserve(n);|添加一段容量n|O(N)
 
 ### 迭代器
-|用法|解释|时间复杂度
-|---|---|---
+|用法|解释
+|---|---
 |vector<Type>:: iterator it;|定义一个Type类型的迭代器it
 |vector<Type>::reverse_iterator it;|定义一个Type类型的反向迭代器it
-|	for (auto it=vec.begin();it!=vec.end();it++) cout<<*it<<endl; |用auto遍历
-|	for (auto it: vec) cout<<it<<endl; |用auto遍历
+|	for (auto it=vec.begin();it!=vec.end();it++)<br>cout<<*it<<endl; |用auto遍历
+|	for (auto it: vec)<br>cout<<it<<endl; |用auto遍历
 
 |支持的操作|解释
-|---|---|
+|---|---
 |operator* |取内容
 |operator-> |取地址
 |operator++ |自增
