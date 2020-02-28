@@ -44,7 +44,7 @@ struct node
 	{
 		return a.x > b.x;
 	}
-}no[macn];
+}no[maxn];
 priority_queue<node> q;
 ```
 ### 修改数据
@@ -61,7 +61,7 @@ emplace效率比push高一点，因为不触发拷贝构造和转移构造
 
 |用法|解释|时间复杂度
 |---|---|---
-|priq.top();|返回队尾元素|O(1)
+|priq.top();|返回队首元素|O(1)
 
 
 ### 删除元素
