@@ -128,6 +128,8 @@ void real(double r) {re = r;}		// 2
 
 ## 全域函数
 
-<img src="./img/全域函数.png" style="zoom:75%;" />
+<img src="./img/全域函数.png" style="zoom:70%;" />
+
+<img src="./img/ostream.png" style="zoom:75%;" />
 
 注意，这里返回值不是引用的原因是：返回的值是新计算的一个临时对象，不是已有变量
